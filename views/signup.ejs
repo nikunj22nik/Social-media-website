@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@coding-blocks/bootstrap@4.5.2/dist/css/bootstrap.min.css" integrity="sha384-qQEE8jdKJvtljxvtgWREfDOl721Sa1Qs8a1huL0PjJo3duiJ2wXnwTIRnbd/cTjY" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<style>
+  body{
+  background-color:rgb(49, 48, 48);
+  }
+</style>
+
+
+
+  </head>
+
+<body>
+  <div id="signup">
+    <div class="sigup_heading" style="text-align: center;">
+    <h1 style="font-family: 'Nerko One', cursive; text-align:center; color:white;">SignUp</h1>
+    <img src="https://cb-thumbnails.s3.ap-south-1.amazonaws.com/underline_welcome.svg">
+  </div>
+    <div class="container-fluid my-4">
+        <div class="row">
+    <div class="col-md-6" id="signupform">
+        <% if(typeof err!='undefined'){%>
+          <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong><%= err %></strong> 
+          </div>
+             <% } %>
+  <form  action="/register" method="POST" enctype="multipart/form-data"  >
+    <div class="form-group my-2">
+    <label for="exampleInputEmail1" style="color:red;width:100%; text-align:center;">Username</label>
+    <input type="text" class="form-control"  value="<%= typeof username !='undefined'?username:'' %>"  name="username" id="exampleInputEmail1" placeholder="Enter your username" aria-describedby="emailHelp">
+    </div>
+  
+  <div class="form-group my-2">
+    <label for="exampleInputEmail1" style="color:red; width:100%; text-align:center;">Email address</label>
+    <input type="email" class="form-control" value="<%= typeof email !='undefined'?email:'' %>" name="email" id="exampleInputEmail1" placeholder="Enter Your Working Email" aria-describedby="emailHelp">
+  </div>
+  
+  <div class="form-group">
+    <label for="exampleInputPassword1" style="color:red; width:100%; text-align:center;">Password</label>
+    <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Enter password">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1" style="color:red; width:100%; text-align:center;">Confirm Password</label>
+    <input type="password" class="form-control" name="cpassword" id="exampleInputPassword1"  placeholder="Confirm password">
+  </div>
+  <div class="form-group my-2">
+    <label for="exampleInputEmail1" style="color:red;width:100%; text-align:center;">City</label>
+    <input type="text" class="form-control"   name="city" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Your City Name">
+    </div>
+  
+    <div class="form-group">
+      <label for="exampleFormControlFile1"  style="color:red;width:100%; text-align:center;">Upload Your Profile Photo</label>
+      <input type="file"  name="avatar" style="color:white;" class="form-control-file" id="exampleFormControlFile1">
+    </div>
+
+  <button type="submit" style="display:block; margin:auto;"  class="btn btn-primary text-center">Submit</button>
+  
+<span  class="ml-2" style="color:white;">Already have account?</span><a href="/login" class="ml-2" style="color:blue;">loginNow</a>
+</form>
+</div>
+
+<div class="col-md-6">
+    <img src="https://cb-thumbnails.s3.ap-south-1.amazonaws.com/accounts-vector.svg" width="600" height="500"> 
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@coding-blocks/bootstrap@4.5.2/dist/js/bootstrap.min.js" integrity="sha384-5kiNX2pRMEoJOeg8N1XzHzWAotDv8A4fZW6cFGvsDgSZmMuECwtOeZ1ta0eO7DBD" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

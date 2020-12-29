@@ -1,0 +1,203 @@
+ <!DOCTYPE html>
+ <html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@coding-blocks/bootstrap@4.5.2/dist/css/bootstrap.min.css" integrity="sha384-qQEE8jdKJvtljxvtgWREfDOl721Sa1Qs8a1huL0PjJo3duiJ2wXnwTIRnbd/cTjY" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+</head>
+
+<body style="background-color: black">
+<div id="signup">
+<h1 style="font-family: 'Nerko One', cursive; text-align:center;color: blanchedalmond;">Login</h1>
+<img src="https://cb-thumbnails.s3.ap-south-1.amazonaws.com/underline_practice.svg" style="display:block; margin: auto;">
+<% if(success_message != '')  {    %>
+
+<div class="alert alert-dismissible alert-success">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong> <%= success_message %>   </strong>
+</div>
+
+<% } %>
+
+<% if(error != ''){%>
+  <div class="alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong><%= error %></strong> 
+  </div>
+     <% } %>
+
+
+
+
+
+<div class="container" id="signupform">
+  <div class="row">
+    <div class="col-md-6 col-sm-12 my-5">
+<form action="/login" method="POST">
+<div class="form-group my-2">
+<label for="exampleInputEmail1" style="color:blanchedalmond;width:100%; text-align:center;">Username</label>
+<input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Your username" >
+</div>
+ 
+ 
+ 
+<div class="form-group">
+<label for="exampleInputPassword1" style="color:blanchedalmond; width:100%; text-align:center;">Password</label>
+<input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Enter Your Password" >
+</div>
+
+ <div>
+ <button type="submit" class="btn btn-primary text-center">Submit</button>
+ <span class="ml-2" style="color: blanchedalmond;">Don't have account? </span><a href="/" class="mr-1" style="color:blue;">RegisterNow</a>
+</div>
+</form>
+</div>
+
+<div class="col-md-6 col-sm-12">
+  <img src="https://cb-thumbnails.s3.ap-south-1.amazonaws.com/practice.svg" class="landing-page__section__vector d-lg-block d-none">
+</div>
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@coding-blocks/bootstrap@4.5.2/dist/js/bootstrap.min.js" integrity="sha384-5kiNX2pRMEoJOeg8N1XzHzWAotDv8A4fZW6cFGvsDgSZmMuECwtOeZ1ta0eO7DBD" crossorigin="anonymous"></script>
+</body>
+</html>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

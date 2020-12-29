@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Langar&family=PT+Sans:ital@1&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Langar&display=swap" rel="stylesheet">
+<style>
+    .usernamecenter{
+        display: block;
+        text-align: center;
+    }
+    .eachuser{
+        display:flex;
+        flex-direction: row;
+    }
+</style>
+</head>
+
+<body style="background-color:blanchedalmond;">
+    <nav>
+        <div class="nav-wrapper">
+          <a href="/success" class="brand-logo ml-1">Mock Social</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/home">All Posts</a></li>
+            <li><a href="'/mypost">Mypost</a></li>
+            <li><a href="/writepost">Writepost</a></li>
+          </ul>
+        </div>
+      </nav>
+    <% for(let p of posts) { %>
+            <div class="container">
+            <div class="row">
+            <div class="col m2"></div>  
+            <div class="col s12 m7">
+            <div class="card">
+            <% if(p.postImg != null) { %>
+            <div class="card-image">
+              <img src="images\upload_post\<%= p.username %><%= p.postImg %> " width="550" height="500">
+            </div>
+            <% } %>
+            <span class="card-title usernamecenter"><b><%= p.username   %> </b> </span>
+            <div class="card-content">
+              <p><%= p.body %></p>
+            </div>
+            
+              <div class="card-action">
+                <% let a=hash1.has(p.id) %>
+                <%  if(a) {    %>
+                <a href="#" id="<%= p.id %>"  class="likes" > <i class="fas fa-thumbs-up"></i> Like <%= p.likes %></a>
+                <% } else{ %>
+                  <a href="#" id="<%= p.id %>" class="likes" > <i class="far fa-thumbs-up"></i> Like <%= p.likes %></a>
+                <% } %>
+                <a href="#" id="<%= p.id %>" class="comment"><i class="fas fa-comment-alt"></i> Comment</a>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>      
+    
+      <% } %>
+  
+      <div id="showcomment" class="modal">
+        <div class="modal-content">
+          <span><b>Comments</b></span>
+          <div class="modal-footer">
+          
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat"> <i class="fas fa-times"></i> Close</a>
+          </div>
+        </div>
+        <div class="row">
+            <form class="col s12">
+              <div class="row">
+                <input id="postid" value="" name="postId" style="display: none;" >   
+               
+                <div class="input-field col s12">
+                  <input placeholder="Placeholder" name="comment" id="usercomment" type="text" class="validate">
+                  <label for="first_name"><b>Add Comment</b></label>
+                </div>
+                </div>
+                <a class="waves-effect waves-light btn" id="addcommentBtn">Post</a>
+                </form>
+                </div>
+                <div id="allcomment"></div>
+      
+      </div>
+        
+      <script src="js/specificuser.js" ></script>
+
+</body>
+</html>

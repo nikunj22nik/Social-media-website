@@ -1,0 +1,348 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" />
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@coding-blocks/bootstrap@4.5.2/dist/css/bootstrap.min.css" integrity="sha384-qQEE8jdKJvtljxvtgWREfDOl721Sa1Qs8a1huL0PjJo3duiJ2wXnwTIRnbd/cTjY" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+ <link rel="stylesheet" href="css/snowflake.css">
+ <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Langar&display=swap" rel="stylesheet">
+
+ <script
+ src="https://code.jquery.com/jquery-3.5.1.js"
+ integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+ crossorigin="anonymous"></script>
+ <style>
+ .box img{
+    height:400px;
+    width:700px;
+    margin:auto;
+    display:block;
+  }
+  #jumb{
+      min-height: 500px;
+}
+#side-bar{
+  position:fixed;
+}
+.right-bar{
+  position:fixed;
+}
+@media screen and (min-width:940px){
+  .mobile{
+    display: none;
+  }
+ }
+ @media screen and (max-width:940px){
+   #side-bar{
+     display: none;
+   }
+   .right-bar{
+    display: none;
+   }
+ }
+
+</style>
+</head>
+<body>
+
+  <%- include('partials/navbar')  %>
+
+
+<div class="container my-1" id="alertshow">
+</div>
+
+  <p id="useridlikes"><% userId %></p>
+   <div class="container-fluid">
+
+  <div class="row">
+
+  <div class="col-md-3 my-1" >
+  <div id="side-bar">
+  <div class="card" style="width: 18rem;">
+
+  <img src="https://source.unsplash.com/300x400/?women,girl" class="card-img-top" alt="dummyimage">
+  <ul class="list-group list-group-flush">
+  <li class="list-group-item"><a href="/addfriend"><i class="fas fa-users"></i> Add Friends</a></li>
+  <li class="list-group-item"> <a href="/chat"><i class="fas fa-envelope-open"></i> Chat</a>  </li>
+      <li class="list-group-item change-password"><a href="#"  ><i class="fas fa-user-cog"></i> Change Password</a></li>
+      <li class="list-group-item"><a href="#"><i class="fas fa-user-cog"></i> Your Photos </a></li>
+     <% if( notification >0) { %>
+      <li class="list-group-item">
+        <button type="button" class="btn btn-link showrequest"><i class="fas fa-bell"></i> FriendRequest <span class="badge badge-light"><%= notification %></span></button>
+     <% } %>
+      </a></li>
+    </ul>
+   </div>
+  </div>
+ </div>
+
+
+
+
+  <div class="service col-md-6 my-3">
+
+      <% if(posts.length==0) { %>
+       <div class="jumbotron jumbotron-fluid">
+       <div class="container">
+       <h1 class="display-4">No Post To Show</h1>
+        <p class="lead">Please make friends to see their posts and upload your post and actively participate in this platform...</p>
+      </div>
+    </div>
+
+    <% } else { %>
+
+
+  <% for(var i=posts.length-1; i >= 0; i--) { %>
+    <% if( posts[i].postImg != null) { %>
+   
+
+      <div class="card mb-3">
+        <img src="images/upload_post/<%= posts[i].username%><%= posts[i].postImg %>" width="550" height="500" class="card-img-top" alt="...">
+        <div class="card-body"> 
+          
+          
+          <% if(hash1.get(posts[i].userId)!=null) { %>
+               
+            <h5 class="card-title"> <img src="images/upload_images/<%= posts[i].username%><%= hash1.get(posts[i].userId) %>"  style="border-radius:50%; width:40px; height:40px;" > <%= posts[i].username %> </h5>
+               <% } else{ %>
+
+          <h5 class="card-title"> <img src="anonymous.jpg"  style="border-radius:50%; width:40px;" > <%= posts[i].username %> </h5> 
+       <% } %>
+           
+
+          <p class="card-text"><%= posts[i].body %></p>
+          <% let a=hash.has(posts[i].id) %>
+          <%  if(a) {    %>
+            <button id="<%= posts[i].id %>" type="button" class="btn btn-link likes"> <i class="fas fa-thumbs-up"></i> Like <span class="badge badge-light contlike"> <%= posts[i].likes %></span></button>
+            <% } else{ %>
+           <button id="<%= posts[i].id %>" type="button" class="btn btn-link likes"> <i class="far fa-thumbs-up"></i> Like <span class="badge badge-light contlike"> <%= posts[i].likes %></span></button>
+              <% } %>
+
+       <button type="button" id="<%= posts[i].id %>" class="btn btn-link comment"><i class="fas fa-comment-alt"></i> Comment</button>
+          <p class="card-text"><small class="text-muted">Last updated at <%= posts[i].createdAt %> </small></p>
+        </div>
+      </div>
+
+
+
+ 
+<% } else { %>
+
+
+
+  <div class="card mb-3">
+   
+    <div class="card-body">
+      <h5 class="card-title"> <img src="anonymous.jpg"  style="border-radius:50%; width:40px;" > <%= posts[i].username %></h5>
+      <p class="card-text"><%= posts[i].body %></p>
+       <% let a=hash.has(posts[i].id) %>
+         <%  if(a) {    %>
+         <button id="<%= posts[i].id %>" type="button" class="btn btn-link likes"> <i class="fas fa-thumbs-up"></i> Like <span class="badge badge-light contlike"> <%= posts[i].likes %></span></button>
+            <% } else{ %>
+        
+          <button id="<%= posts[i].id %>" type="button" class="btn btn-link likes"> <i class="far fa-thumbs-up"></i> Like <span class="badge badge-light contlike"> <%= posts[i].likes %></span></button>
+          <% } %>
+      <a href="#" id="<%= posts[i].id %>" class="card-link comment"><i class="fas fa-comment-alt"></i> Comment</a>
+      <p class="card-text"><small class="text-muted">Last updated <%= posts[i].createdAt %></small></p>
+    </div>
+  </div>
+
+<% } %>
+<% } %>
+<% } %>
+</div>
+
+
+
+<div class="col-md-3 my-3">
+  <div class="right-bar">
+    <div class="card" style="width: 18rem;">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><b>  <button type="button" class="btn btn-link shownotification"><i class="fas fa-bell"></i> Notification <span class="badge badge-light" id="messageLength" ><%= messageLen %></span></button></b></li> 
+        <li class="list-group-item"><b>New Members</b></li>
+        <li class="list-group-item"><img src="https://source.unsplash.com/300x400/?girl" width="70" height="70"  style="border-radius:50%;"> Tanya_431 </li>
+        <li class="list-group-item"><img src="https://source.unsplash.com/300x400/?boy" width="70" height="70"  style="border-radius:50%;"> Sohil_khana_2 </li>
+        <li class="list-group-item"><img src="https://source.unsplash.com/300x400/?men" width="70" height="70"  style="border-radius:50%;"> deepeshtg43 </li>
+        <li class="list-group-item"><img src="https://source.unsplash.com/300x400/?baby" width="70" height="70" style="border-radius:50%;"> arnav_swim <li>
+       </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!-- Modal for showing friend request -->
+
+<div id="modal">
+
+<div class="modal fade" id="friendRequest" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"  id="modal-title">Friend Request</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="mbody1">
+          <table class="table table-striped">
+
+            <tbody>
+          <%    for(let i of friendrequestuser){ %>
+              <tr>
+                <% if(i.avatar!=null){ %>
+                <th scope="row"><img src="images/upload_images/<%= i.username %><%= i.avatar %>"height="50" width="50" style="border-radius: 50%;"></th>
+                <% }else{ %>
+                  <th scope="row"><img src="anonymous.jpg" height="50" width="50" style="border-radius: 50%;"></th>
+                  <% } %>
+                <td><a href="/specificuser?username=<%= i.username %>"><b><%= i.username %></b></a></td>
+                <td><button type="button" class="btn btn-info adduser" id="<%= i.id %>" ><i class="fas fa-user-plus"></i> Add</button></td>
+                <td><button type="button" class="btn btn-info deleteuser"  id="<%= i.id %>" ><i class="fas fa-trash-alt"></i> Delete</button></td>
+              </tr>
+            <% } %>  
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- modal for changing password -->
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div id="modal3">
+<div class="modal fade" id="changepassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+         
+          <div class="form-group">
+            <label for="exampleInputPassword1">Current Password</label>
+            <input type="password" class="form-control" id="Password1">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">New Password</label>
+            <input type="password" class="form-control" id="Password2">
+          </div>
+        
+          <button type="button" id="password-change-btn" class="btn btn-primary">Save Changes</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+
+<!-- Modal for comment -->
+
+
+
+<div id="modal1">
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+
+<div class="modal-dialog modal-xl">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="staticBackdropLabel">Comments</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      
+         
+           <input id="postid" value="" name="postId" style="display: none;" >   
+    
+           <div class="form-group">
+              <label for="exampleInputEmail1">Comment</label>
+              <input type="text" class="form-control" id="exampleInputEmail1" name="comment" aria-describedby="emailHelp">
+             
+            </div>
+            <button type="button" class="btn btn-primary" id="addcommentBtn">Add</button>
+  
+       
+       <div id="allcomment"></div>
+        <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+     
+    </div>
+  </div>
+</div>
+</div>
+
+
+</div>
+</div>
+
+
+
+
+<!-- modal for notification of like/comment -->
+<div class="modal" id="modalLike" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Notification</h5>
+        <button type="button" id="closing" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="modalLikeBody">
+        <% for(let t of get_message) { %>
+          <p style="font-family: 'Langar', cursive;"> <%=  t.message  %>   </p>
+          <hr>
+          <% } %>
+   
+      </div>
+    
+    </div>
+  </div>
+</div>
+
+
+
+    
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@coding-blocks/bootstrap@4.5.2/dist/js/bootstrap.min.js" integrity="sha384-5kiNX2pRMEoJOeg8N1XzHzWAotDv8A4fZW6cFGvsDgSZmMuECwtOeZ1ta0eO7DBD" crossorigin="anonymous"></script>
+<script src="js/home.js"></script>
+</body>
+</html>
+
+
+
+
+
+

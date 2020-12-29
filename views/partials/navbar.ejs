@@ -1,0 +1,70 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/success"><i class="far fa-snowflake"></i> Mock Social <i class="far fa-snowflake"></i></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+               
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active  nav-coloring">
+          <a class="nav-link" href="/home" data-component="all-post">All Post </a>
+        </li>
+        <li class="nav-item active" id="mypost">
+          <a class="nav-link" href="/specificuser?username=<%= username %>" data-component="my-post">My Posts</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/writepost" data-component="write-post">Write Posts</a>
+        </li>
+        
+        <li class="nav-item active mobile">
+          <a class="nav-link hidden-md active"  href="/addfriend" data-component="write-post"><i class="fas fa-users"></i> Add Friend</a>
+        </li>
+        <li class="nav-item active mobile">
+          <a class="nav-link hidden-md" href="#" data-component="write-post"><i class="fas fa-envelope-open"></i> chat</a>
+        </li>
+        <li class="nav-item active mobile">
+          <a class="nav-link mobile change-password" href="#" data-component="write-post"><i class="fas fa-user-cog"></i> change password</a>
+        </li>
+  
+     </ul>
+     <form class="form-inline my-2 my-lg-0" action="/search" method="POST">
+      <input class="form-control mr-sm-2" type="search" name="username" id="searchvalue" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" id="searchbtn" type="submit">Search</button>
+    </form>
+        <div class="ml-0 m-2">
+            <span id="name" style="color:white;"><%  if(typeof username !='undefined'){        %>
+            <%= username %>
+            <% } %>
+            </span>
+
+            <%  if(userProfile !=null){        %>
+              
+              <img alt="User Pic" src="images/upload_images/<%= username  %><%=userProfile%>" width="35" height="35" style="border-radius:50%;" > </div>       
+<% } else { %> 
+        <img src="anonymous.jpg" width="25"  style="border-radius: 7px;">
+     <% } %>
+        <a style="color:rgb(228, 114, 114);" class="ml-1" id="abc"></a>
+      </div>
+    </div>
+  </nav>
+  <script>
+  $( document ).ready(function() {
+    
+    $.get('/userpost',(data)=>{
+console.log(data);
+if(data.length==0){
+$("#mypost").hide();
+}
+else{
+ 
+  $('#mypost').show();
+}
+
+    })
+   
+
+
+     
+  });
+
+</script>

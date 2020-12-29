@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@coding-blocks/bootstrap@4.5.2/dist/css/bootstrap.min.css" integrity="sha384-qQEE8jdKJvtljxvtgWREfDOl721Sa1Qs8a1huL0PjJo3duiJ2wXnwTIRnbd/cTjY" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="crossorigin="anonymous"></script>
+<link rel="stylesheet" href="writepost.css">
+<link rel="stylesheet" href="css/snowflake.css">
+  </head>
+  <style>
+    @media screen and (min-width:940px){
+  .mobile{
+    display: none;
+  }
+ }
+ @media screen and (max-width:940px){
+   #side-bar{
+     display: none;
+   }
+   .right-bar{
+    display: none;
+   }
+ }
+
+
+  </style>
+<body>
+
+
+  <%- include('./partials/navbar'); -%>
+
+  <div class="container my-2">
+   <h1 class="text-center" style="color:black;  font-style: italic;  font-family: Impact, Charcoal, sans-serif;">Write Posts</h1>
+
+</div>
+<% if(typeof err!='undefined'){%>
+  <div class="alert alert-dismissible alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong><%= err %></strong> 
+  </div>
+     <% } %>
+
+     <% if(typeof success!='undefined'){%>
+      <div class="alert alert-dismissible alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong><%= success %></strong> 
+      </div> 
+         <% } %>
+
+
+<div class="container">
+<div id="forminp" class="col-md-12">
+        <form action="/writepost" method="POST" enctype="multipart/form-data"> 
+          
+          <%  if(typeof username!='undefind') {        %>
+          <input name="username" style="display:none;" value="<%= username %>" >
+          
+            <% } %>
+            
+          <div class="form-group" style="display: none;" >
+            <label for="formGroupExampleInput">Title</label>
+            <input type="text" class="form-control" name="title" id="title" placeholder="Enter Title">
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Description</label>
+            <textarea class="form-control" name="body" id="description" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlFile1">Upload Image</label>
+            <input type="file"  name="postImg" style="color:black;" class="form-control-file" id="fileUpload">
+          </div>
+      
+         
+          <button type="submit" id="btn" style="display:block; margin:auto;" class="btn btn-primary">Add Post</button>
+        </form>
+      </div>
+  </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@coding-blocks/bootstrap@4.5.2/dist/js/bootstrap.min.js" integrity="sha384-5kiNX2pRMEoJOeg8N1XzHzWAotDv8A4fZW6cFGvsDgSZmMuECwtOeZ1ta0eO7DBD" crossorigin="anonymous"></script>
+</body>
+</html>
